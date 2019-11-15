@@ -6,9 +6,7 @@ ARCH := $(shell getconf LONG_BIT)
 # Find header files for the Eigen matrix library
 # Usually in a standard location like /usr/include/eigen3/
 # Change manually here if needed
-ifndef EIGEN_INCLUDE
-	EIGEN_INCLUDE := $(shell pkg-config --cflags eigen3)
-endif
+EIGEN_INCLUDE ?= $(shell pkg-config --cflags eigen3)
 
 # Remove nasty Eigen warnings when compiling
 # CXX_EIGEN_FLAGS := -Wno-ignored-attributes -Wno-misleading-indentation -Wno-deprecated-declarations
@@ -23,7 +21,7 @@ lib: src/KMeansRexCore.cpp
 	# Create lib/ directory, or be silent if already exists
 	mkdir -p lib/
 	# Create shared library LIBFILE
-	g++ $(CXX_FLAGS) $(EIGEN_INCLUDE) src/KMeansRexCore.cpp -o $(LIBFILE)
+	g++ $(CXX_FLAGS) -I "$(EIGEN_INCLUDE)" src/KMeansRexCore.cpp -o $(LIBFILE)
 
 python: lib
 
