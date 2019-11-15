@@ -212,7 +212,7 @@ void run_lloyd( ExtMat &X, ExtMat &Mu, ExtMat &Z, int Niter )  {
 // ===========================================================================
 
 void RunKMeans(double *X_IN,  int N,  int D, int K, int Niter, \
-               int seed, char* initname, double *Mu_OUT, double *Z_OUT) {
+               int seed, const char* initname, double *Mu_OUT, double *Z_OUT) {
   set_seed(seed);
 
   ExtMat X (X_IN, N, D);
